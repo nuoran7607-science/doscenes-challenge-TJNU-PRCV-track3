@@ -52,11 +52,11 @@ python submit_track3.py \
     --out_dir submission \
 ```
 
-Note: This script will output both submission.csv and submission_baseline.csv in the specified --out_dir.
+Note: This script will output both submission.csv (with-language) and submission_baseline.csv  (without-language) in the specified --out_dir.
 
 ### Train from Scratch
 
-Training evaluates the model and automatically writes two files: submission.csv (with-language) and submission_baseline.csv (without-language) to calculate the Instruction Conditioning Gain.
+Training evaluates the model and automatically writes two files: submission.csv and submission_baseline.csv to calculate the Instruction Conditioning Gain.
 
 ```bash
 python train.py \
