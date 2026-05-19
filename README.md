@@ -2,7 +2,7 @@
 
 This repository contains the solution for the [doScenes Instructed Driving Challenge](https://mi3-lab.github.io/doScenes_challenge) **Track 3 (Ablation)**.
 
-The goal of this track is to quantify the benefit of language instructions ($\Delta$ADE). Participants must evaluate and report results for both **with-language** (instruction-conditioned) and **without-language** (history-only baseline) models under the exact same protocol.
+The goal of this track is to quantify the benefit of language instructions. Participants must evaluate and report results for both **with-language** (instruction-conditioned) and **without-language** (history-only baseline) models under the exact same protocol.
 
 ## Project Structure
 
@@ -56,7 +56,7 @@ Note: This script will output both submission.csv and submission_baseline.csv in
 
 ### Train from Scratch
 
-Training evaluates the model and automatically writes two files: submission.csv (with-language) and submission_baseline.csv (without-language) to calculate the Instruction Conditioning Gain ($\Delta$ADE).
+Training evaluates the model and automatically writes two files: submission.csv (with-language) and submission_baseline.csv (without-language) to calculate the Instruction Conditioning Gain.
 
 ```bash
 python train.py \
