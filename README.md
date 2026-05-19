@@ -37,7 +37,24 @@ pip install torch==2.6.0 transformers==4.57.3 nuscenes-devkit==1.1.11 numpy pand
 
 ## Quick Start
 
-### Train + Auto-Submit
+### Pretrained Weights
+
+Download `best_model.pth` (635 MB) from [GitHub Releases](https://github.com/nuoran7607-science/doscenes-challenge_TJNU-PRCV/releases/tag/v1.0).
+
+### Inference Only
+
+Generate both the conditioned predictions and the ablation baseline from a trained checkpoint:
+
+```bash
+python submit_track3.py \
+    --ckpt best_model.pth \
+    --test_pkl datasets/pre_processed_data/test_track2.pkl \
+    --out_dir submission \
+```
+
+Note: This script will output both submission.csv and submission_baseline.csv in the specified --out_dir.
+
+### Train from Scratch
 
 Training evaluates the model and automatically writes two files: submission.csv (with-language) and submission_baseline.csv (without-language) to calculate the Instruction Conditioning Gain ($\Delta$ADE).
 
@@ -65,23 +82,6 @@ runs/v1/
     ├── best_model.pth
     └── last_model.pth
 ```
-
-### Pretrained Weights
-
-Download `best_model.pth` (635 MB) from [GitHub Releases](https://github.com/nuoran7607-science/doscenes-challenge_TJNU-PRCV/releases/tag/v1.0).
-
-### Inference Only
-
-Generate both the conditioned predictions and the ablation baseline from a trained checkpoint:
-
-```bash
-python submit_track3.py \
-    --ckpt best_model.pth \
-    --test_pkl datasets/pre_processed_data/test_track2.pkl \
-    --out_dir submission \
-```
-
-Note: This script will output both submission.csv and submission_baseline.csv in the specified --out_dir.
 
 ## Data Preprocessing (Optional)
 
