@@ -1,14 +1,14 @@
-# doScenes Challenge — Track 2: Language + History
+# doScenes Challenge — Track 3: Ablation Study
 
-This repository contains the solution for the [doScenes Instructed Driving Challenge](https://mi3-lab.github.io/doScenes_challenge) **Track 2 (Language + History → Future Trajectory)**.
+This repository contains the solution for the [doScenes Instructed Driving Challenge](https://mi3-lab.github.io/doScenes_challenge) **Track 3 (Ablation)**.
 
-The goal of this track is to predict the ego-vehicle's future trajectory (next 6 seconds) using only 2 seconds of historical trajectory and a natural language instruction, without any visual input.
+The goal of this track is to quantify the benefit of language instructions ($\Delta$ADE). Participants must evaluate and report results for both **with-language** (instruction-conditioned) and **without-language** (history-only baseline) models under the exact same protocol.
 
 ## Project Structure
 
 ```
 ├── train.py                        # Training + auto-submission
-├── submit_track2.py                # Standalone inference & submission
+├── submit_track3.py                # Standalone inference & submission
 ├── model/
 │   ├── flow_matching.py            # OT-CFM model wrapper
 │   ├── velocity_net.py             # Velocity field network
@@ -39,7 +39,7 @@ pip install torch==2.6.0 transformers==4.57.3 nuscenes-devkit==1.1.11 numpy pand
 
 ### Train + Auto-Submit
 
-Training automatically runs test inference and writes the official submission.csv after completion.
+Training evaluates the model and automatically writes two files: submission.csv (with-language) and submission_baseline.csv (without-language) to calculate the Instruction Conditioning Gain ($\Delta$ADE).
 
 ```bash
 python train.py \
@@ -58,8 +58,8 @@ runs/v1/
 ├── config.json
 ├── metrics.jsonl
 ├── summary.json
-├── submission.csv               # Official track 2 submission
-├── submission_baseline.csv
+├── submission.csv               # Predictions WITH language instructions
+├── submission_baseline.csv      # Predictions WITHOUT language (History-only)
 ├── tensorboard/
 └── checkpoints/
     ├── best_model.pth
@@ -72,14 +72,16 @@ Download `best_model.pth` (635 MB) from [GitHub Releases](https://github.com/nuo
 
 ### Inference Only
 
-Generate submission.csv from a trained checkpoint for Track 2 evaluation:
+Generate both the conditioned predictions and the ablation baseline from a trained checkpoint:
 
 ```bash
-python submit_track2.py \
+python submit_track3.py \
     --ckpt best_model.pth \
     --test_pkl datasets/pre_processed_data/test_track2.pkl \
     --out_dir submission \
 ```
+
+Note: This script will output both submission.csv and submission_baseline.csv in the specified --out_dir.
 
 ## Data Preprocessing (Optional)
 
